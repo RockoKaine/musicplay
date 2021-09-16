@@ -1,7 +1,12 @@
 const music = document.querySelector('audio');
+const artist = document.getElementById('artist');
+const title = document.querySelector('#title');
+const image = document.querySelector('img');
 const playBtn = document.getElementById('play'); 
 const prevBtn = document.getElementById('prev'); 
 const nextBtn = document.getElementById('next'); 
+
+let songIndex = 0;
 
 const songs = [
     {
@@ -27,6 +32,26 @@ const songs = [
 ]
 
 
+// next/prev song
+
+function nextSong () {
+
+    if(songIndex === songs.length - 1) {
+        
+        nextBtn.style.color = "red"
+        songIndex = songIndex;
+
+    } else {
+
+        loadSong(songs[songIndex]);
+        music.play();
+        console.log(songIndex)
+        songIndex++;
+        console.log(songs.length - 1)
+    }
+
+}
+
 // Play/Pause
 playBtn.addEventListener("click", ()=>{
     if(music.currentTime === 0 || music.paused){
@@ -45,6 +70,15 @@ playBtn.addEventListener("click", ()=>{
 prevBtn.addEventListener("click", ()=>{
     alert("prev");
 });
-nextBtn.addEventListener("click", ()=>{
-    alert("next");
-});
+nextBtn.addEventListener("click", nextSong);
+
+// Update DOM
+
+function loadSong(song){
+    title.textContent = song.displayName;
+    artist.textContent = song.artist;
+    music.src = `music/${song.name}.mp3`;
+    image.src = `img/${song.name}.jpg`;
+}
+
+loadSong(songs[0]);
