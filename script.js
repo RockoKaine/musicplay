@@ -132,8 +132,12 @@ function setProgressBar(e) {
     const width = this.clientWidth;
     const clickX = e.offsetX;
     const {duration} = music;
-    music.currentTime = (clickX / width) * duration
-
+    music.currentTime = (clickX / width) * duration;
+    if(!isPlaying) {
+        const progressPercent = (music.currentTime/duration) * 100;
+        progress.style.width = `${progressPercent}%`
+        // playSong();
+    }
 }
 
 // Previous/Next function
