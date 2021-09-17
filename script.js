@@ -6,8 +6,7 @@ const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress');
 const durationEl = document.getElementById('duration');
 const currentTimeEl = document.getElementById('current-time');
-const playlistContainer = document.getElementById('playlist-container'); 
-const songInPlaylist = document.getElementById('song-in-playlist'); 
+const playlistContainer = document.getElementById('playlist-container');
 const playBtn = document.getElementById('play'); 
 const prevBtn = document.getElementById('prev'); 
 const nextBtn = document.getElementById('next'); 
@@ -26,8 +25,18 @@ const songs = [
         artist: 'Jacinto Design'
     },
     {
+        name: 'jacinto-1',
+        displayName: 'Machine',
+        artist: 'Jacinto Design'
+    },
+    {
         name: 'jacinto-3',
         displayName: 'Goodnight, Disco Queen',
+        artist: 'Jacinto Design'
+    },
+    {
+        name: 'jacinto-3',
+        displayName: 'Disco Queen',
         artist: 'Jacinto Design'
     },
     {
@@ -61,7 +70,6 @@ playBtn.addEventListener("click", ()=> (isPlaying ? pauseSong() : playSong()));
 
 
 // Update DOM
-
 function loadSong(song){
     title.textContent = song.displayName;
     artist.textContent = song.artist;
@@ -70,6 +78,8 @@ function loadSong(song){
   
 }
 
+
+// song index
 let songIndex = 0;
 
 
@@ -142,32 +152,36 @@ function setProgressBar(e) {
     }
 }
 
+
+
+
+// populate the playlist followed by play a selected song
 function populatePlaylist() {
     songs.forEach((song)=>{
         playlistContainer.innerHTML +=  `<div class="song-in-playlist" id="song-in-playlist">
-        <span class="track" id="track">${song.displayName}: ${song.artist}</span>
-        </div>`
+                                        <span class="track" id="track">
+                                        ${song.displayName}: ${song.artist}
+                                        </span>
+                                        </div>`
     });
 }
 
-
-
 function playSelectedSong(e) {
 
-    console.log(e);
-
-    // loadSong(songs[songIndex]);
-    // playSong();    
+    let playlistTitle = e.target.innerText.split(':')[0];
+    let selectedIndex = songs.findIndex(song => song.displayName === playlistTitle);
+    songIndex = selectedIndex;
+    loadSong(songs[selectedIndex]);
+    playSong();    
 
 }
 
+populatePlaylist();
 
 // Previous/Next function
-songInPlaylist.addEventListener('click', playSelectedSong)
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
 music.addEventListener("ended", nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', setProgressBar);
-
-populatePlaylist();
+playlistContainer.addEventListener('click', playSelectedSong);

@@ -26,12 +26,25 @@ body {
 
 .playlist-container {
   width: 95%;
-  min-height: 13%;
+  height: 100px;
   margin: auto;
   background: black;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  overflow:scroll;
+  -ms-overflow-style: none;
+  /* for Internet Explorer, Edge */
+  scrollbar-width: none;
+  /* for Firefox */
+
+}
+
+
+
+.playlist-container ::-webkit-scrollbar {
+  display: none;
+  /* for Chrome, Safari, and Opera */
 }
 
 
@@ -40,6 +53,7 @@ body {
   justify-content: space-between;
   font-size: 0.85rem;
   margin: 2px;
+ 
 }
 .track {
   background: pink;
