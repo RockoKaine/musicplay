@@ -6,6 +6,8 @@ const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress');
 const durationEl = document.getElementById('duration');
 const currentTimeEl = document.getElementById('current-time');
+const playlistContainer = document.getElementById('playlist-container'); 
+const songInPlaylist = document.getElementById('song-in-playlist'); 
 const playBtn = document.getElementById('play'); 
 const prevBtn = document.getElementById('prev'); 
 const nextBtn = document.getElementById('next'); 
@@ -140,10 +142,32 @@ function setProgressBar(e) {
     }
 }
 
+function populatePlaylist() {
+    songs.forEach((song)=>{
+        playlistContainer.innerHTML +=  `<div class="song-in-playlist" id="song-in-playlist">
+        <span class="track" id="track">${song.displayName}: ${song.artist}</span>
+        </div>`
+    });
+}
+
+
+
+function playSelectedSong(e) {
+
+    console.log(e);
+
+    // loadSong(songs[songIndex]);
+    // playSong();    
+
+}
+
+
 // Previous/Next function
+songInPlaylist.addEventListener('click', playSelectedSong)
 prevBtn.addEventListener("click", prevSong);
 nextBtn.addEventListener("click", nextSong);
 music.addEventListener("ended", nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', setProgressBar);
 
+populatePlaylist();
