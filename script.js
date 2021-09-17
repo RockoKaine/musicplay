@@ -10,6 +10,7 @@ const playlistContainer = document.getElementById('playlist-container');
 const playBtn = document.getElementById('play'); 
 const prevBtn = document.getElementById('prev'); 
 const nextBtn = document.getElementById('next'); 
+const xToggle = document.getElementById('x-toggle'); 
 
 
 
@@ -159,9 +160,9 @@ function setProgressBar(e) {
 function populatePlaylist() {
     songs.forEach((song)=>{
         playlistContainer.innerHTML +=  `<div class="song-in-playlist" id="song-in-playlist">
-                                        <span class="track" id="track">
+                                        
                                         ${song.displayName}: ${song.artist}
-                                        </span>
+                                        
                                         </div>`
     });
 }
@@ -185,3 +186,5 @@ music.addEventListener("ended", nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
 progressContainer.addEventListener('click', setProgressBar);
 playlistContainer.addEventListener('click', playSelectedSong);
+
+
